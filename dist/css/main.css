@@ -1,0 +1,63 @@
+.lineChartContainer {
+  width: 90%;
+  margin: auto;
+}
+
+.graphNavContainer {
+  text-align: center;
+  margin: auto;
+  margin-top: 1em;
+}
+
+.graphNav a,
+#weightAndCalories {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  background-color: rgb(144, 144, 144);
+}
+
+#weightAndCalories {
+  width: 183px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.graphNav a:hover,
+#weightAndCalories:hover,
+#createFormButton:hover {
+  background-color: #ddd;
+  color: black;
+}
+.graphNav a.active,
+#weightAndCalories.active {
+  background-color: rgb(106, 212, 134);
+  color: white;
+}
+
+#createFormButton {
+  color: #f2f2f2;
+  text-align: center;
+  border: none;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  background-color: rgb(144, 144, 144);
+  margin-top: 20px;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}

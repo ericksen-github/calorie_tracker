@@ -1,0 +1,68 @@
+#formContainer {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  top: 125px;
+  left: 50%;
+  margin-left: -200px;
+  padding: 10px;
+  width: 220px;
+  z-index: 3;
+  display: block;
+}
+
+.titleTextContainer {
+  margin: 5px 0 5px 0;
+}
+
+#formTitle {
+  text-align: center;
+  margin: auto;
+  font-size: large;
+}
+
+#formDateContainer {
+  text-align: center;
+}
+
+.formSubtitle {
+  display: inline-block;
+  width: 160px;
+}
+
+.formTextBox {
+  display: inline-block;
+  width: 50px;
+}
+
+#buttonContainer {
+  text-align: center;
+}
+
+#submitButton,
+#cancelButton {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+  font-size: 17px;
+  margin: 0 5px 0 5px;
+}
+
+#submitButton {
+  background-color: rgb(106, 212, 134);
+}
+
+#cancelButton {
+  background-color: rgb(144, 144, 144);
+}
+
+#submitButton:hover {
+  background-color: rgb(88, 189, 115);
+}
+
+#cancelButton:hover {
+  background-color: #ddd;
+  color: black;
+}
