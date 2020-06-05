@@ -2,7 +2,7 @@
 import { EntryFactory } from "./entryObject.js";
 import { allData, updatedData, lineOne, lineTwo } from "./dataset.js";
 import { lineChart } from "./Chart.js";
-import { render } from "./tableFunctions.js";
+import { tableFunctions } from "./tableFunctions.js";
 
 const inputFormFunctions = (() => {
   // prevents user from typing non number characters into textbox
@@ -55,7 +55,7 @@ const inputFormFunctions = (() => {
     lineChart.data = updatedData;
     lineChart.update();
 
-    render(allData);
+    tableFunctions.render(allData);
     removeForm();
   };
 
