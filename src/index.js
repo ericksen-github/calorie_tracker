@@ -2,6 +2,7 @@ import { lineChart } from "./modules/Chart.js";
 import { createInputForm } from "./modules/createInputForm";
 
 lineChart;
+console.log("index on");
 
 document.getElementById("createFormButton").addEventListener("click", () => {
   createInputForm();
