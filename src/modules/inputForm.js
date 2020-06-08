@@ -1,30 +1,9 @@
 //import { projectsArray, localStorageFunctions } from "./localStorage";
 import { EntryFactory } from "./entryObject.js";
-import { allData, updatedData, lineOne, lineTwo } from "./dataset.js";
-import { lineChart } from "./Chart.js";
+import { allData, updateChartData } from "./dataset.js";
 import { tableFunctions } from "./tableFunctions.js";
 
 const inputFormFunctions = (() => {
-  // prevents user from typing non number characters into textbox
-  const isNumberKey = (text, evt) => {
-    const charCode = evt.which ? evt.which : evt.keyCode;
-
-    // checks if a decimal already exists in the textbox
-    if (charCode == 46) {
-      if (text.indexOf(".") === -1) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-    }
-
-    return true;
-  };
-
   const submitButtonPress = () => {
     const date = document.getElementById("formDate").value;
     const weight = document.getElementById("weightTextBox").value;
@@ -43,17 +22,9 @@ const inputFormFunctions = (() => {
     const newEntry = EntryFactory(date, tempArray);
 
     allData.push(newEntry);
+    allData.sort((a, b) => a.date - b.date);
 
-    allData.forEach((element) => {
-      lineOne.push(element.weight);
-    });
-
-    allData.forEach((element) => {
-      lineTwo.push(element.calorie);
-    });
-
-    lineChart.data = updatedData;
-    lineChart.update();
+    updateChartData();
 
     tableFunctions.render(allData);
     removeForm();
@@ -65,6 +36,12 @@ const inputFormFunctions = (() => {
   };
 
   const inputChecker = (date, numArray) => {
+    const textBoxIDArray = [
+      "weightTextBox",
+      "calorieTextBox",
+      "exerciseTextBox",
+      "proteinTextBox",
+    ];
     let checker;
 
     if (date == "") {
@@ -73,24 +50,42 @@ const inputFormFunctions = (() => {
       return false;
     }
 
-    numArray.forEach((element) => {
-      if (element == "") {
-        return;
+    for (let i = 0; i < numArray.length; i++) {
+      if (numArray[i] == "") {
+        continue;
       }
-      if (isNaN(element) || element < 0) {
-        console.log(element + "TextBox");
-        document.getElementById(element + "TextBox").style.borderColor = "red";
+      if (isNaN(numArray[i]) || numArray[i] < 0) {
+        document.getElementById(textBoxIDArray[i]).style.borderColor = "red";
         checker = false;
       } else {
-        document.getElementById(element + "TextBox").style.borderColor =
-          "black";
+        document.getElementById(textBoxIDArray[i]).style.borderColor = "black";
       }
-    });
+    }
 
     if (checker == false) {
       alert(
         "Make sure you have a date selected and that you only have positive numbers in each text box."
       );
+      return false;
+    }
+
+    return true;
+  };
+
+  // prevents user from typing non number characters into textbox
+  const isNumberKey = (text, evt) => {
+    const charCode = evt.which ? evt.which : evt.keyCode;
+
+    // checks if a decimal already exists in the textbox
+    if (charCode == 46) {
+      if (text.indexOf(".") === -1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;
     }
 

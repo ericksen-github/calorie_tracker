@@ -1,5 +1,5 @@
 // entry object - date, weight, calorie, exercise, protein
-import { allData } from "./dataset";
+import { allData, updateChartData } from "./dataset";
 
 const tableFunctions = (() => {
   const render = (allData) => {
@@ -39,8 +39,9 @@ const tableFunctions = (() => {
           allData.splice(j, 1); // and splices out entry
         }
       }
+
+      updateChartData();
       //  localStorageFunctions.saveNewData();
-      console.log(allData);
     };
   };
 
