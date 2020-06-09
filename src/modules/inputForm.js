@@ -22,11 +22,9 @@ const inputFormFunctions = (() => {
     const newEntry = EntryFactory(date, tempArray);
 
     allData.push(newEntry);
-    allData.sort((a, b) => a.date - b.date);
 
+    tableFunctions.sortTable(allData);
     updateChartData();
-
-    tableFunctions.render(allData);
     removeForm();
   };
 

@@ -45,8 +45,18 @@ const tableFunctions = (() => {
     };
   };
 
+  const sortTable = (allData) => {
+    allData.sort(function compare(a, b) {
+      var dateA = new Date(a.date);
+      var dateB = new Date(b.date);
+      return dateA - dateB;
+    });
+    render(allData);
+  };
+
   return {
     render,
+    sortTable,
   };
 })();
 

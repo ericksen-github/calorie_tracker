@@ -1,6 +1,7 @@
 .lineChartContainer {
-  width: 90%;
+  width: 85%;
   margin: auto;
+  margin-top: 50px;
 }
 
 .graphNavContainer {
