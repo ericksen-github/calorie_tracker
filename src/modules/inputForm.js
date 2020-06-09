@@ -23,8 +23,8 @@ const inputFormFunctions = (() => {
 
     allData.push(newEntry);
 
-    tableFunctions.sortTable(allData);
-    updateChartData();
+    tableFunctions.sortTable();
+
     removeForm();
   };
 

@@ -2,6 +2,8 @@
 import { allData, updateChartData } from "./dataset";
 
 const tableFunctions = (() => {
+  let sortTracker = "newest";
+
   const render = (allData) => {
     let entryHTML = "";
 
@@ -19,6 +21,7 @@ const tableFunctions = (() => {
 
     document.querySelector("tbody").innerHTML = entryHTML;
 
+    updateChartData();
     createRemoveListeners();
   };
 
@@ -45,18 +48,35 @@ const tableFunctions = (() => {
     };
   };
 
-  const sortTable = (allData) => {
-    allData.sort(function compare(a, b) {
-      var dateA = new Date(a.date);
-      var dateB = new Date(b.date);
-      return dateA - dateB;
-    });
+  const sortTable = () => {
+    if (sortTracker == "newest") {
+      allData.sort(function compare(a, b) {
+        var dateA = new Date(a.date);
+        var dateB = new Date(b.date);
+        return dateA - dateB;
+      });
+    } else {
+      allData.sort(function compare(a, b) {
+        var dateA = new Date(a.date);
+        var dateB = new Date(b.date);
+        return dateB - dateA;
+      });
+    }
     render(allData);
   };
 
+  const checkTracker = () => {
+    if (sortTracker == "newest") {
+      sortTracker = "oldest";
+    } else {
+      sortTracker = "newest";
+    }
+    sortTable();
+  };
+
   return {
-    render,
     sortTable,
+    checkTracker,
   };
 })();
 
