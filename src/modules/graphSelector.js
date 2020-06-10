@@ -32,6 +32,30 @@ const selectDataSet = () => {
     labelOne = titleLabelArray[0];
     borderColorOne = borderColorArray[0];
     chartOneDataset(dataOne, labelOne, borderColorOne);
+  } else if (id == "caloriesButton") {
+    allData.forEach((ele) => {
+      dataOne.push(ele.calorie);
+      Xlabels.push(ele.date);
+    });
+    labelOne = titleLabelArray[1];
+    borderColorOne = borderColorArray[1];
+    chartOneDataset(dataOne, labelOne, borderColorOne);
+  } else if (id == "exerciseButton") {
+    allData.forEach((ele) => {
+      dataOne.push(ele.exercise);
+      Xlabels.push(ele.date);
+    });
+    labelOne = titleLabelArray[2];
+    borderColorOne = borderColorArray[2];
+    chartOneDataset(dataOne, labelOne, borderColorOne);
+  } else if (id == "proteinButton") {
+    allData.forEach((ele) => {
+      dataOne.push(ele.protein);
+      Xlabels.push(ele.date);
+    });
+    labelOne = titleLabelArray[3];
+    borderColorOne = borderColorArray[3];
+    chartOneDataset(dataOne, labelOne, borderColorOne);
   } else if (id == "weightAndCalories") {
     allData.forEach((ele) => {
       dataOne.push(ele.weight);
@@ -59,7 +83,7 @@ const chartOneDataset = (dataOne, labelOne, borderColorOne) => {
     datasets: [
       {
         data: dataOne,
-        label: labelOne,
+        label: [labelOne],
         borderColor: borderColorOne,
         fill: false,
       },
