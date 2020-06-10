@@ -16,15 +16,12 @@ const inputFormFunctions = (() => {
     if (!inputChecker(date, tempArray)) {
       return;
     }
-
     decimalCleanUp(tempArray);
 
     const newEntry = EntryFactory(date, tempArray);
-
     allData.push(newEntry);
 
     tableFunctions.sortTable();
-
     removeForm();
   };
 

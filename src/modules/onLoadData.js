@@ -1,10 +1,10 @@
-let weightBorderColor = "rgb(106, 212, 134)";
-let caloriesBorderColor = "rgb(15, 100, 200)";
+let weightBorderColor = "rgb(106, 212, 134)"; // green
+let caloriesBorderColor = "rgb(15, 100, 200)"; // blue
 let xLabel = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
 let weightData = [184.6, 184.8, 184.8, 187.4, 184, 183.2];
 let caloriesData = [3508, 3275, 3316, 3209, 3228, 3239];
 
-let newData = {
+let onLoadData = {
   datasets: [
     {
       data: weightData,
@@ -28,4 +28,26 @@ let newData = {
   labels: xLabel,
 };
 
-export { newData };
+let onLoadOptions = {
+  scales: {
+    yAxes: [
+      {
+        id: "left-y-axis",
+        type: "linear",
+        position: "left",
+        ticks: {},
+      },
+      {
+        id: "right-y-axis",
+        type: "linear",
+        position: "right",
+        ticks: {},
+        gridLines: {
+          display: false,
+        },
+      },
+    ],
+  },
+};
+
+export { onLoadData, onLoadOptions };
