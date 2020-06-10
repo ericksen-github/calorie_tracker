@@ -1,6 +1,6 @@
 // entry object - date, weight, calorie, exercise, protein
 import { allData } from "./dataset";
-import { selectGraph } from "./graphSelector";
+import { graphSelector } from "./graphSelector";
 
 const tableFunctions = (() => {
   let sortTracker = "newest";
@@ -21,7 +21,7 @@ const tableFunctions = (() => {
     }
     document.querySelector("tbody").innerHTML = entryHTML;
     createRemoveListeners();
-    selectGraph();
+    graphSelector.selectGraph();
   };
 
   const createRemoveListeners = () => {
@@ -41,7 +41,7 @@ const tableFunctions = (() => {
           allData.splice(j, 1); // and splices out entry
         }
       }
-      selectGraph();
+      graphSelector.selectGraph();
       //  localStorageFunctions.saveNewData();
     };
   };

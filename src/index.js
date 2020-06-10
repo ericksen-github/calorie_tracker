@@ -1,7 +1,7 @@
 import { lineChart } from "./modules/Chart.js";
 import { createInputForm } from "./modules/createInputForm";
 import { tableFunctions } from "./modules/tableFunctions";
-import { selectGraph } from "./modules/graphSelector";
+import { graphSelector } from "./modules/graphSelector";
 
 // initializes linechart on page
 lineChart;
@@ -18,7 +18,7 @@ for (let i = 0; i < btns.length; i++) {
     const current = document.getElementsByClassName("active");
     current[0].className = current[0].className.replace(" active", "");
     this.className += " active";
-    selectGraph(this);
+    graphSelector.selectGraph();
   });
 }
 

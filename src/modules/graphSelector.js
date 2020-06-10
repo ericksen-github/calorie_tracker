@@ -14,154 +14,154 @@ let LabelTwo;
 let borderColorOne;
 let borderColorTwo;
 
-const selectGraph = () => {
-  selectDataSet();
-};
+const graphSelector = (() => {
+  const selectGraph = () => {
+    const id = document.getElementsByClassName("active")[0].id;
+    let dataOne = [];
+    let dataTwo = [];
+    let Xlabels = [];
 
-const selectDataSet = () => {
-  const id = document.getElementsByClassName("active")[0].id;
-  let dataOne = [];
-  let dataTwo = [];
-  let Xlabels = [];
-
-  if (id == "weightButton") {
-    allData.forEach((ele) => {
-      dataOne.push(ele.weight);
-      Xlabels.push(ele.date);
-    });
-    labelOne = titleLabelArray[0];
-    borderColorOne = borderColorArray[0];
-    chartOneDataset(dataOne, labelOne, borderColorOne);
-  } else if (id == "caloriesButton") {
-    allData.forEach((ele) => {
-      dataOne.push(ele.calorie);
-      Xlabels.push(ele.date);
-    });
-    labelOne = titleLabelArray[1];
-    borderColorOne = borderColorArray[1];
-    chartOneDataset(dataOne, labelOne, borderColorOne);
-  } else if (id == "exerciseButton") {
-    allData.forEach((ele) => {
-      dataOne.push(ele.exercise);
-      Xlabels.push(ele.date);
-    });
-    labelOne = titleLabelArray[2];
-    borderColorOne = borderColorArray[2];
-    chartOneDataset(dataOne, labelOne, borderColorOne);
-  } else if (id == "proteinButton") {
-    allData.forEach((ele) => {
-      dataOne.push(ele.protein);
-      Xlabels.push(ele.date);
-    });
-    labelOne = titleLabelArray[3];
-    borderColorOne = borderColorArray[3];
-    chartOneDataset(dataOne, labelOne, borderColorOne);
-  } else if (id == "weightAndCalories") {
-    allData.forEach((ele) => {
-      dataOne.push(ele.weight);
-      dataTwo.push(ele.calorie);
-      Xlabels.push(ele.date);
-    });
-    labelOne = titleLabelArray[0];
-    LabelTwo = titleLabelArray[1];
-    borderColorOne = borderColorArray[0];
-    borderColorTwo = borderColorArray[1];
-    chartTwoDataSets(
-      dataOne,
-      labelOne,
-      borderColorOne,
-      dataTwo,
-      LabelTwo,
-      borderColorTwo
-    );
-  }
-  lineChart.update();
-};
-
-const chartOneDataset = (dataOne, labelOne, borderColorOne) => {
-  const oneDataSet = {
-    datasets: [
-      {
-        data: dataOne,
-        label: [labelOne],
-        borderColor: borderColorOne,
-        fill: false,
-      },
-    ],
+    if (id == "weightButton") {
+      allData.forEach((ele) => {
+        dataOne.push(ele.weight);
+        Xlabels.push(ele.date);
+      });
+      labelOne = titleLabelArray[0];
+      borderColorOne = borderColorArray[0];
+      chartOneDataset(dataOne, labelOne, borderColorOne);
+    } else if (id == "caloriesButton") {
+      allData.forEach((ele) => {
+        dataOne.push(ele.calorie);
+        Xlabels.push(ele.date);
+      });
+      labelOne = titleLabelArray[1];
+      borderColorOne = borderColorArray[1];
+      chartOneDataset(dataOne, labelOne, borderColorOne);
+    } else if (id == "exerciseButton") {
+      allData.forEach((ele) => {
+        dataOne.push(ele.exercise);
+        Xlabels.push(ele.date);
+      });
+      labelOne = titleLabelArray[2];
+      borderColorOne = borderColorArray[2];
+      chartOneDataset(dataOne, labelOne, borderColorOne);
+    } else if (id == "proteinButton") {
+      allData.forEach((ele) => {
+        dataOne.push(ele.protein);
+        Xlabels.push(ele.date);
+      });
+      labelOne = titleLabelArray[3];
+      borderColorOne = borderColorArray[3];
+      chartOneDataset(dataOne, labelOne, borderColorOne);
+    } else if (id == "weightAndCalories") {
+      allData.forEach((ele) => {
+        dataOne.push(ele.weight);
+        dataTwo.push(ele.calorie);
+        Xlabels.push(ele.date);
+      });
+      labelOne = titleLabelArray[0];
+      LabelTwo = titleLabelArray[1];
+      borderColorOne = borderColorArray[0];
+      borderColorTwo = borderColorArray[1];
+      chartTwoDataSets(
+        dataOne,
+        labelOne,
+        borderColorOne,
+        dataTwo,
+        LabelTwo,
+        borderColorTwo
+      );
+    }
+    lineChart.update();
   };
 
-  const oneAxis = {
-    scales: {
-      yAxes: [
+  const chartOneDataset = (dataOne, labelOne, borderColorOne) => {
+    const oneDataSet = {
+      datasets: [
         {
-          ticks: {},
+          data: dataOne,
+          label: [labelOne],
+          borderColor: borderColorOne,
+          fill: false,
         },
       ],
-    },
-  };
+    };
 
-  lineChart.data = oneDataSet;
-  lineChart.options = oneAxis;
-};
-
-const chartTwoDataSets = (
-  dataOne,
-  labelOne,
-  borderColorOne,
-  dataTwo,
-  LabelTwo,
-  borderColorTwo
-) => {
-  const twoDataSets = {
-    datasets: [
-      {
-        data: dataOne,
-        label: labelOne,
-        borderColor: borderColorOne,
-        fill: false,
-
-        // This binds the dataset to the left y axis
-        yAxisID: "left-y-axis",
-      },
-      {
-        data: dataTwo,
-        label: LabelTwo,
-        borderColor: borderColorArray[1],
-        fill: false,
-
-        // This binds the dataset to the right y axis
-        yAxisID: "right-y-axis",
-      },
-    ],
-    labels: [],
-  };
-
-  const twoAxis = {
-    scales: {
-      yAxes: [
-        {
-          id: "left-y-axis",
-          type: "linear",
-          position: "left",
-          ticks: {},
-        },
-        {
-          id: "right-y-axis",
-          type: "linear",
-          position: "right",
-          ticks: {},
-          gridLines: {
-            display: false,
+    const oneAxis = {
+      scales: {
+        yAxes: [
+          {
+            ticks: {},
           },
-        },
-      ],
-    },
+        ],
+      },
+    };
+
+    lineChart.data = oneDataSet;
+    lineChart.options = oneAxis;
   };
 
-  lineChart.data = twoDataSets;
-  lineChart.options = twoAxis;
-};
+  const chartTwoDataSets = (
+    dataOne,
+    labelOne,
+    borderColorOne,
+    dataTwo,
+    LabelTwo,
+    borderColorTwo
+  ) => {
+    const twoDataSets = {
+      datasets: [
+        {
+          data: dataOne,
+          label: labelOne,
+          borderColor: borderColorOne,
+          fill: false,
 
-// scales
+          // This binds the dataset to the left y axis
+          yAxisID: "left-y-axis",
+        },
+        {
+          data: dataTwo,
+          label: LabelTwo,
+          borderColor: borderColorArray[1],
+          fill: false,
 
-export { selectGraph };
+          // This binds the dataset to the right y axis
+          yAxisID: "right-y-axis",
+        },
+      ],
+      labels: [],
+    };
+
+    const twoAxis = {
+      scales: {
+        yAxes: [
+          {
+            id: "left-y-axis",
+            type: "linear",
+            position: "left",
+            ticks: {},
+          },
+          {
+            id: "right-y-axis",
+            type: "linear",
+            position: "right",
+            ticks: {},
+            gridLines: {
+              display: false,
+            },
+          },
+        ],
+      },
+    };
+
+    lineChart.data = twoDataSets;
+    lineChart.options = twoAxis;
+  };
+
+  return {
+    selectGraph,
+  };
+})();
+
+export { graphSelector };
