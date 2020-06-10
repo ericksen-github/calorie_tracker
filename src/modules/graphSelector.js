@@ -2,6 +2,7 @@ import { allData } from "./dataset";
 import { lineChart } from "./Chart";
 
 const titleLabelArray = ["Weight", "Calories", "Exercise Calories", "Protein"];
+const dataTypeArray = ["weight", "calorie", "exercise", "protein"];
 const borderColorArray = [
   "rgb(106, 212, 134)", // green/weight
   "rgb(15, 100, 200)", // blue/calories
@@ -9,6 +10,9 @@ const borderColorArray = [
   "rgb(110, 40, 40)", // red/protein
 ];
 
+let dataOne = [];
+let dataTwo = [];
+let xLabels = [];
 let labelOne;
 let LabelTwo;
 let borderColorOne;
@@ -17,65 +21,49 @@ let borderColorTwo;
 const graphSelector = (() => {
   const selectGraph = () => {
     const id = document.getElementsByClassName("active")[0].id;
-    let dataOne = [];
-    let dataTwo = [];
-    let Xlabels = [];
 
     if (id == "weightButton") {
-      allData.forEach((ele) => {
-        dataOne.push(ele.weight);
-        Xlabels.push(ele.date);
-      });
-      labelOne = titleLabelArray[0];
-      borderColorOne = borderColorArray[0];
-      chartOneDataset(dataOne, labelOne, borderColorOne);
+      pushOneData(0);
+      chartOneDataset();
     } else if (id == "caloriesButton") {
-      allData.forEach((ele) => {
-        dataOne.push(ele.calorie);
-        Xlabels.push(ele.date);
-      });
-      labelOne = titleLabelArray[1];
-      borderColorOne = borderColorArray[1];
-      chartOneDataset(dataOne, labelOne, borderColorOne);
+      pushOneData(1);
+      chartOneDataset();
     } else if (id == "exerciseButton") {
-      allData.forEach((ele) => {
-        dataOne.push(ele.exercise);
-        Xlabels.push(ele.date);
-      });
-      labelOne = titleLabelArray[2];
-      borderColorOne = borderColorArray[2];
-      chartOneDataset(dataOne, labelOne, borderColorOne);
+      pushOneData(2);
+      chartOneDataset();
     } else if (id == "proteinButton") {
-      allData.forEach((ele) => {
-        dataOne.push(ele.protein);
-        Xlabels.push(ele.date);
-      });
-      labelOne = titleLabelArray[3];
-      borderColorOne = borderColorArray[3];
-      chartOneDataset(dataOne, labelOne, borderColorOne);
+      pushOneData(3);
+      chartOneDataset();
     } else if (id == "weightAndCalories") {
       allData.forEach((ele) => {
         dataOne.push(ele.weight);
         dataTwo.push(ele.calorie);
-        Xlabels.push(ele.date);
+        xLabels.push(ele.date);
       });
       labelOne = titleLabelArray[0];
       LabelTwo = titleLabelArray[1];
       borderColorOne = borderColorArray[0];
       borderColorTwo = borderColorArray[1];
-      chartTwoDataSets(
-        dataOne,
-        labelOne,
-        borderColorOne,
-        dataTwo,
-        LabelTwo,
-        borderColorTwo
-      );
+      chartTwoDataSets();
     }
     lineChart.update();
   };
 
-  const chartOneDataset = (dataOne, labelOne, borderColorOne) => {
+  const pushOneData = (num) => {
+    dataOne.splice(0, dataOne.length);
+    xLabels.splice(0, xLabels.length);
+
+    const dataType = dataTypeArray[num];
+    allData.forEach((ele) => {
+      dataOne.push(ele[dataType]);
+      xLabels.push(ele.date);
+    });
+
+    labelOne = titleLabelArray[num];
+    borderColorOne = borderColorArray[num];
+  };
+
+  const chartOneDataset = () => {
     const oneDataSet = {
       datasets: [
         {
@@ -85,6 +73,7 @@ const graphSelector = (() => {
           fill: false,
         },
       ],
+      labels: xLabels,
     };
 
     const oneAxis = {
@@ -101,14 +90,7 @@ const graphSelector = (() => {
     lineChart.options = oneAxis;
   };
 
-  const chartTwoDataSets = (
-    dataOne,
-    labelOne,
-    borderColorOne,
-    dataTwo,
-    LabelTwo,
-    borderColorTwo
-  ) => {
+  const chartTwoDataSets = () => {
     const twoDataSets = {
       datasets: [
         {
@@ -123,14 +105,14 @@ const graphSelector = (() => {
         {
           data: dataTwo,
           label: LabelTwo,
-          borderColor: borderColorArray[1],
+          borderColor: borderColorTwo,
           fill: false,
 
           // This binds the dataset to the right y axis
           yAxisID: "right-y-axis",
         },
       ],
-      labels: [],
+      labels: xLabels,
     };
 
     const twoAxis = {
