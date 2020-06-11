@@ -3,7 +3,7 @@ import { allData } from "./dataset";
 import { graphSelector } from "./graphSelector";
 
 const tableFunctions = (() => {
-  let sortTracker = "newest";
+  let sortTracker = "newest"; // used to track what direction to sort dates by
 
   const render = (allData) => {
     let entryHTML = "";

@@ -1,6 +1,6 @@
 //import { projectsArray, localStorageFunctions } from "./localStorage";
 import { EntryFactory } from "./entryObject.js";
-import { allData, updateChartData } from "./dataset.js";
+import { allData } from "./dataset.js";
 import { tableFunctions } from "./tableFunctions.js";
 
 const inputFormFunctions = (() => {
@@ -46,10 +46,13 @@ const inputFormFunctions = (() => {
     }
 
     for (let i = 0; i < numArray.length; i++) {
+      // varifies proper data in textboxes
       if (numArray[i] == "") {
+        // ignores blank data
         continue;
       }
       if (isNaN(numArray[i]) || numArray[i] < 0) {
+        // verifies for a non negative number in box
         document.getElementById(textBoxIDArray[i]).style.borderColor = "red";
         checker = false;
       } else {
@@ -58,6 +61,7 @@ const inputFormFunctions = (() => {
     }
 
     if (checker == false) {
+      // alerts if input check fails.
       alert(
         "Make sure you have a date selected and that you only have positive numbers in each text box."
       );
