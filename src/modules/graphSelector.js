@@ -10,9 +10,6 @@ const borderColorArray = [
   "rgb(110, 40, 40)", // red/protein
 ];
 
-let dataOne = [];
-let dataTwo = [];
-let xLabels = [];
 let labelOne;
 let LabelTwo;
 let borderColorOne;
@@ -24,36 +21,23 @@ const graphSelector = (() => {
 
     if (id == "weightButton") {
       pushOneData(0);
-      chartOneDataset();
     } else if (id == "caloriesButton") {
       pushOneData(1);
-      chartOneDataset();
     } else if (id == "exerciseButton") {
       pushOneData(2);
-      chartOneDataset();
     } else if (id == "proteinButton") {
       pushOneData(3);
-      chartOneDataset();
     } else if (id == "weightAndCalories") {
-      allData.forEach((ele) => {
-        dataOne.push(ele.weight);
-        dataTwo.push(ele.calorie);
-        xLabels.push(ele.date);
-      });
-      labelOne = titleLabelArray[0];
-      LabelTwo = titleLabelArray[1];
-      borderColorOne = borderColorArray[0];
-      borderColorTwo = borderColorArray[1];
-      chartTwoDataSets();
+      pushTwoData();
     }
     lineChart.update();
   };
 
   const pushOneData = (num) => {
-    dataOne.splice(0, dataOne.length);
-    xLabels.splice(0, xLabels.length);
-
+    let dataOne = [];
+    let xLabels = [];
     const dataType = dataTypeArray[num];
+
     allData.forEach((ele) => {
       dataOne.push(ele[dataType]);
       xLabels.push(ele.date);
@@ -61,9 +45,30 @@ const graphSelector = (() => {
 
     labelOne = titleLabelArray[num];
     borderColorOne = borderColorArray[num];
+
+    chartOneDataset(dataOne, xLabels);
   };
 
-  const chartOneDataset = () => {
+  const pushTwoData = () => {
+    let dataOne = [];
+    let dataTwo = [];
+    let xLabels = [];
+
+    allData.forEach((ele) => {
+      dataOne.push(ele.weight);
+      dataTwo.push(ele.calorie);
+      xLabels.push(ele.date);
+    });
+
+    labelOne = titleLabelArray[0];
+    LabelTwo = titleLabelArray[1];
+    borderColorOne = borderColorArray[0];
+    borderColorTwo = borderColorArray[1];
+
+    chartTwoDataSets(dataOne, dataTwo, xLabels);
+  };
+
+  const chartOneDataset = (dataOne, xLabels) => {
     const oneDataSet = {
       datasets: [
         {
@@ -90,7 +95,7 @@ const graphSelector = (() => {
     lineChart.options = oneAxis;
   };
 
-  const chartTwoDataSets = () => {
+  const chartTwoDataSets = (dataOne, dataTwo, xLabels) => {
     const twoDataSets = {
       datasets: [
         {
