@@ -14,7 +14,7 @@ const tableFunctions = (() => {
                          <td>${entry.calorie}</td>
                          <td>${entry.exercise}</td>
                          <td>${entry.protein}</td>
-                         <td class = "editOuter><div class = "editButton">Edit</div></td>
+                         <td class = "editOuter"><div class = "editButton">Edit</div></td>
                          <td class = "removeOuter"><div class = "removeButton">X</div></td>
                      </tr>
                     `;
