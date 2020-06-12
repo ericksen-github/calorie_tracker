@@ -27,8 +27,7 @@
 }
 
 .graphNav a:hover,
-#weightAndCalories:hover,
-#createFormButton:hover {
+#weightAndCalories:hover {
   background-color: #ddd;
   color: black;
 }
@@ -39,14 +38,19 @@
 }
 
 #createFormButton {
-  color: #f2f2f2;
+  color: white;
   text-align: center;
   border: none;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-  background-color: rgb(144, 144, 144);
+  background-color: rgb(15, 100, 200);
   margin-top: 20px;
+}
+
+#createFormButton:hover {
+  background-color: rgb(136, 184, 240);
+  color: black;
 }
 
 #overlay {

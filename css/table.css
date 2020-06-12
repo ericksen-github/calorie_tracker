@@ -13,6 +13,18 @@ td {
   border-top: solid 1px #b1b1b1;
 }
 
+.editButton {
+  padding: 6px 10px 6px 10px;
+  text-align: center;
+  color: white;
+  background-color: rgb(15, 100, 200);
+}
+
+.editButton:hover {
+  background-color: rgb(136, 184, 240);
+  color: black;
+}
+
 .removeButton {
   border-radius: 50%;
   padding: 6px 10px 6px 10px;
