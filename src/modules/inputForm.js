@@ -90,12 +90,10 @@ const inputFormFunctions = (() => {
     return true;
   };
 
-  // removes hanging decimal from numbers
+  // rounds to 1 decimal/removes hanging decimal points
   const decimalCleanUp = (tempArray) => {
     for (let i = 0; i < tempArray.length; i++) {
-      if (tempArray[i].slice(tempArray[i].length - 1) == ".") {
-        tempArray[i] = tempArray[i].slice(0, -1);
-      }
+      tempArray[i] = Math.round(tempArray[i] * 10) / 10;
     }
   };
 
