@@ -17,6 +17,7 @@ const inputFormFunctions = (() => {
       return;
     }
 
+    isDateInArray(date);
     decimalCleanUp(tempArray);
 
     const newEntry = EntryFactory(date, tempArray);
@@ -40,10 +41,6 @@ const inputFormFunctions = (() => {
     ];
     let checker;
 
-    if (!checkDate(date)) {
-      return false;
-    }
-
     for (let i = 0; i < numArray.length; i++) {
       // varifies proper data in textboxes
       if (numArray[i] == "") {
@@ -57,6 +54,10 @@ const inputFormFunctions = (() => {
       } else {
         document.getElementById(textBoxIDArray[i]).style.borderColor = "black";
       }
+    }
+
+    if (!checkDate(date)) {
+      checker = false;
     }
 
     if (checker == false) {
@@ -103,21 +104,16 @@ const inputFormFunctions = (() => {
       document.getElementById("formDate").style.background =
         "rgb(250, 149, 149)";
       return false;
+    } else {
+      return true;
     }
-    if (isDateInArray(date)) {
-      // checks if date already exists to prevent multiple entries for same day
-      alert(
-        "Date already exists. Pick a new date or edit the entry for that date in the table."
-      );
-      return false;
-    }
-    return true;
   };
 
+  // check to remove existing entries for entered date
   const isDateInArray = (date) => {
     for (let i = 0; i < allData.length; i++) {
       if (allData[i].date == date) {
-        return true;
+        allData.splice(i, 1); // splices out entry
       }
     }
   };
