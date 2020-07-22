@@ -22,8 +22,8 @@ const inputFormFunctions = (() => {
 
     const newEntry = EntryFactory(date, tempArray);
     allData.push(newEntry);
-
-    tableFunctions.sortTable();
+    compareDateLocations(date);
+    tableFunctions.render();
     removeForm();
   };
 
@@ -114,7 +114,56 @@ const inputFormFunctions = (() => {
     for (let i = 0; i < allData.length; i++) {
       if (allData[i].date == date) {
         allData.splice(i, 1); // splices out entry
+        break;
       }
+    }
+  };
+
+  const compareDateLocations = (date) => {
+    let loc; // index of date in allData
+    const oneDay = 24 * 60 * 60 * 1000;
+
+    for (let i = 0; i < allData.length; i++) {
+      if (allData[i].date == date) {
+        loc = i;
+        break;
+      }
+    }
+
+    if (allData[loc - 1]) {
+      const firstDate = new Date(allData[loc].date);
+      const secondDate = new Date(allData[loc - 1].date);
+      let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+      if (diffDays > 1) {
+        addLowerDates(loc, diffDays, oneDay);
+      }
+    }
+  };
+
+  const addLowerDates = (loc, diffDays, oneDay) => {
+    while (diffDays > 1) {
+      const firstDate = new Date(allData[loc].date);
+      let secondDate = new Date(allData[loc - 1].date);
+
+      secondDate.setDate(secondDate.getDate() + 1); // increments date of entry 1 index down from newest entry
+
+      let month = secondDate.getUTCMonth() + 1; //months from 1-12
+      const day = secondDate.getUTCDate();
+      const year = secondDate.getUTCFullYear();
+
+      if (month < 10) {
+        month = "0" + month;
+      }
+
+      secondDate = year + "-" + month + "-" + day;
+
+      const newEntry = EntryFactory(secondDate, [0, 0, 0, 0]);
+      allData.push(newEntry);
+      tableFunctions.sortTable();
+
+      secondDate = new Date(secondDate);
+
+      diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
     }
   };
 

@@ -3,9 +3,34 @@ import { allData } from "./dataset";
 import { graphSelector } from "./graphSelector";
 
 const tableFunctions = (() => {
+  const sortTable = () => {
+    if (sortTracker == "newest") {
+      allData.sort(function compare(a, b) {
+        var dateA = new Date(a.date);
+        var dateB = new Date(b.date);
+        return dateA - dateB;
+      });
+    } else {
+      allData.sort(function compare(a, b) {
+        var dateA = new Date(a.date);
+        var dateB = new Date(b.date);
+        return dateB - dateA;
+      });
+    }
+  };
+
+  const checkTracker = () => {
+    if (sortTracker == "newest") {
+      sortTracker = "oldest";
+    } else {
+      sortTracker = "newest";
+    }
+    sortTable();
+  };
+
   let sortTracker = "newest"; // used to track what direction to sort dates by
 
-  const render = (allData) => {
+  const render = () => {
     let entryHTML = "";
 
     for (let entry of allData) {
@@ -46,35 +71,10 @@ const tableFunctions = (() => {
     };
   };
 
-  const sortTable = () => {
-    if (sortTracker == "newest") {
-      allData.sort(function compare(a, b) {
-        var dateA = new Date(a.date);
-        var dateB = new Date(b.date);
-        return dateA - dateB;
-      });
-    } else {
-      allData.sort(function compare(a, b) {
-        var dateA = new Date(a.date);
-        var dateB = new Date(b.date);
-        return dateB - dateA;
-      });
-    }
-    render(allData);
-  };
-
-  const checkTracker = () => {
-    if (sortTracker == "newest") {
-      sortTracker = "oldest";
-    } else {
-      sortTracker = "newest";
-    }
-    sortTable();
-  };
-
   return {
     sortTable,
     checkTracker,
+    render,
   };
 })();
 
