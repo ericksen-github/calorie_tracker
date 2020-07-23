@@ -91,7 +91,7 @@ const inputFormFunctions = (() => {
     return true;
   };
 
-  // rounds to 1 decimal/removes hanging decimal points
+  // rounds to 1 decimal/removes hanging decimal points/changes 0 values to null
   const decimalCleanUp = (tempArray) => {
     for (let i = 0; i < tempArray.length; i++) {
       tempArray[i] = Math.round(tempArray[i] * 10) / 10;
