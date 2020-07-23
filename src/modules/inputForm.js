@@ -134,9 +134,9 @@ const inputFormFunctions = (() => {
     }
 
     if (allData[loc - 1]) {
-      const firstDate = new Date(allData[loc].date);
-      const secondDate = new Date(allData[loc - 1].date);
-      let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+      const entryDate = new Date(allData[loc].date);
+      const priorDate = new Date(allData[loc - 1].date);
+      let diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
       if (diffDays > 1) {
         addLowerDates(loc, diffDays, oneDay);
       }
@@ -145,28 +145,28 @@ const inputFormFunctions = (() => {
 
   const addLowerDates = (loc, diffDays, oneDay) => {
     while (diffDays > 1) {
-      const firstDate = new Date(allData[loc].date);
-      let secondDate = new Date(allData[loc - 1].date);
+      const entryDate = new Date(allData[loc].date);
+      let priorDate = new Date(allData[loc - 1].date);
 
-      secondDate.setDate(secondDate.getDate() + 1); // increments date of entry 1 index down from newest entry
+      priorDate.setDate(priorDate.getDate() + 1); // increments date of entry 1 index down from newest entry
 
-      let month = secondDate.getUTCMonth() + 1; //months from 1-12
-      const day = secondDate.getUTCDate();
-      const year = secondDate.getUTCFullYear();
+      let month = priorDate.getUTCMonth() + 1; //months from 1-12
+      const day = priorDate.getUTCDate();
+      const year = priorDate.getUTCFullYear();
 
       if (month < 10) {
         month = "0" + month;
       }
 
-      secondDate = year + "-" + month + "-" + day;
+      priorDate = year + "-" + month + "-" + day;
 
-      const newEntry = EntryFactory(secondDate, [null, null, null, null]);
+      const newEntry = EntryFactory(priorDate, [null, null, null, null]);
       allData.push(newEntry);
       tableFunctions.sortTable();
 
-      secondDate = new Date(secondDate);
+      priorDate = new Date(priorDate);
 
-      diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+      diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
     }
   };
 
