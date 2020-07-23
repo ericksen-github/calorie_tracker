@@ -34,7 +34,6 @@ const tableFunctions = (() => {
 
     for (let entry of allData) {
       if (areAllNull(entry)) {
-        console.log("all are null");
         continue;
       }
 

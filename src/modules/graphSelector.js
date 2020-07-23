@@ -40,7 +40,7 @@ const graphSelector = (() => {
 
     allData.forEach((ele) => {
       dataOne.push(ele[dataType]);
-      xLabels.push(ele.date);
+      xLabels.push(formatXLabels(ele.date));
     });
 
     labelOne = titleLabelArray[num];
@@ -57,7 +57,7 @@ const graphSelector = (() => {
     allData.forEach((ele) => {
       dataOne.push(ele.weight);
       dataTwo.push(ele.calorie);
-      xLabels.push(ele.date);
+      xLabels.push(formatXLabels(ele.date));
     });
 
     labelOne = titleLabelArray[0];
@@ -145,6 +145,14 @@ const graphSelector = (() => {
 
     lineChart.data = twoDataSets;
     lineChart.options = twoAxis;
+  };
+
+  const formatXLabels = (date) => {
+    date = date.slice(5);
+    if (date.charAt(0) == 0) {
+      date = date.slice(1);
+    }
+    return date;
   };
 
   return {
