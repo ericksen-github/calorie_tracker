@@ -95,6 +95,9 @@ const inputFormFunctions = (() => {
   const decimalCleanUp = (tempArray) => {
     for (let i = 0; i < tempArray.length; i++) {
       tempArray[i] = Math.round(tempArray[i] * 10) / 10;
+      if (tempArray[i] == 0) {
+        tempArray[i] = null;
+      }
     }
   };
 
