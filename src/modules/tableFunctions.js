@@ -33,6 +33,11 @@ const tableFunctions = (() => {
     let entryHTML = "";
 
     for (let entry of allData) {
+      if (areAllNull(entry)) {
+        console.log("all are null");
+        continue; // if non-date entries are all null, does not add to table
+      }
+
       let w, c, e, p;
       [w, c, e, p] = nullSwapper(entry, w, c, e, p);
 
@@ -51,6 +56,18 @@ const tableFunctions = (() => {
     graphSelector.selectGraph();
   };
 
+  const areAllNull = (entry) => {
+    if (
+      entry.weight == null &&
+      entry.calorie == null &&
+      entry.exercise == null &&
+      entry.protein == null
+    ) {
+      return true;
+    }
+  };
+
+  // places empty string if value null, otherwise gives entry value
   const nullSwapper = (entry, w, c, e, p) => {
     if (entry.weight == null) {
       w = "";
