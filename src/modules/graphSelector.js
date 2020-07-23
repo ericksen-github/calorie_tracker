@@ -82,6 +82,7 @@ const graphSelector = (() => {
     };
 
     const oneAxis = {
+      spanGaps: true,
       scales: {
         yAxes: [
           {

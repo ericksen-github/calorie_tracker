@@ -3,6 +3,7 @@ import { allData } from "./dataset";
 import { graphSelector } from "./graphSelector";
 
 const tableFunctions = (() => {
+  let sortTracker = "newest"; // used to track what direction to sort dates by
   const sortTable = () => {
     if (sortTracker == "newest") {
       allData.sort(function compare(a, b) {
@@ -28,17 +29,18 @@ const tableFunctions = (() => {
     sortTable();
   };
 
-  let sortTracker = "newest"; // used to track what direction to sort dates by
-
   const render = () => {
     let entryHTML = "";
 
     for (let entry of allData) {
+      let w, c, e, p;
+      [w, c, e, p] = nullSwapper(entry, w, c, e, p);
+
       entryHTML += `<tr><td>${entry.date}</td>
-                         <td>${entry.weight}</td>
-                         <td>${entry.calorie}</td>
-                         <td>${entry.exercise}</td>
-                         <td>${entry.protein}</td>
+                         <td>${w}</td>
+                         <td>${c}</td>
+                         <td>${e}</td>
+                         <td>${p}</td>
                          <td class = "editOuter"><div class = "editButton">Edit</div></td>
                          <td class = "removeOuter"><div class = "removeButton">X</div></td>
                      </tr>
@@ -47,6 +49,34 @@ const tableFunctions = (() => {
     document.querySelector("tbody").innerHTML = entryHTML;
     createRemoveListeners();
     graphSelector.selectGraph();
+  };
+
+  const nullSwapper = (entry, w, c, e, p) => {
+    if (entry.weight == null) {
+      w = "";
+    } else {
+      w = entry.weight;
+    }
+
+    if (entry.calorie == null) {
+      c = "";
+    } else {
+      c = entry.calorie;
+    }
+
+    if (entry.exercise == null) {
+      e = "";
+    } else {
+      e = entry.exercise;
+    }
+
+    if (entry.protein == null) {
+      p = "";
+    } else {
+      p = entry.protein;
+    }
+
+    return [w, c, e, p];
   };
 
   const createRemoveListeners = () => {

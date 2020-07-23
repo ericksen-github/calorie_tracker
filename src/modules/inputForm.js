@@ -157,7 +157,7 @@ const inputFormFunctions = (() => {
 
       secondDate = year + "-" + month + "-" + day;
 
-      const newEntry = EntryFactory(secondDate, [0, 0, 0, 0]);
+      const newEntry = EntryFactory(secondDate, [null, null, null, null]);
       allData.push(newEntry);
       tableFunctions.sortTable();
 
