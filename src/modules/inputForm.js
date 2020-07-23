@@ -126,6 +126,7 @@ const inputFormFunctions = (() => {
     let loc; // index of date in allData
     const oneDay = 24 * 60 * 60 * 1000;
 
+    // finds location of entry in allData
     for (let i = 0; i < allData.length; i++) {
       if (allData[i].date == date) {
         loc = i;
@@ -148,25 +149,26 @@ const inputFormFunctions = (() => {
       const entryDate = new Date(allData[loc].date);
       let priorDate = new Date(allData[loc - 1].date);
 
-      priorDate.setDate(priorDate.getDate() + 1); // increments date of entry 1 index down from newest entry
+      priorDate.setDate(priorDate.getDate() + 1); // increments date of priorDate
 
-      let month = priorDate.getUTCMonth() + 1; //months from 1-12
+      let month = priorDate.getUTCMonth() + 1; //months from 1-12 (returns 0-11 + 1)
       const day = priorDate.getUTCDate();
       const year = priorDate.getUTCFullYear();
 
       if (month < 10) {
-        month = "0" + month;
+        month = "0" + month; // formats month to be consistant on table
       }
 
-      priorDate = year + "-" + month + "-" + day;
+      priorDate = year + "-" + month + "-" + day; //same format as entry.date
 
       const newEntry = EntryFactory(priorDate, [null, null, null, null]);
       allData.push(newEntry);
       tableFunctions.sortTable();
 
-      priorDate = new Date(priorDate);
+      priorDate = new Date(priorDate); //changes priorDate to match
 
       diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
+      loc++;
     }
   };
 
