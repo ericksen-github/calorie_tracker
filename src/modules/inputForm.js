@@ -135,11 +135,10 @@ const inputFormFunctions = (() => {
       }
     }
 
+    const entryDate = new Date(allData[loc].date);
     // checks for dates above entry and adds blanks if needed
     if (allData[loc + 1]) {
-      const entryDate = new Date(allData[loc].date);
       const nextDate = new Date(allData[loc + 1].date);
-
       let diffDays = Math.round(Math.abs((nextDate - entryDate) / oneDay));
       if (diffDays > 1) {
         addBlankDates(loc, diffDays, oneDay, "upper");
@@ -148,7 +147,6 @@ const inputFormFunctions = (() => {
 
     // checks for dates below entry and adds blanks if needed
     if (allData[loc - 1]) {
-      const entryDate = new Date(allData[loc].date);
       const priorDate = new Date(allData[loc - 1].date);
       let diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
       if (diffDays > 1) {
@@ -170,18 +168,7 @@ const inputFormFunctions = (() => {
         otherDate.setDate(otherDate.getDate() + 1); // increments date of otherDate
       }
 
-      let month = otherDate.getUTCMonth() + 1; //months from 1-12 (returns 0-11 + 1)
-      let day = otherDate.getUTCDate();
-      const year = otherDate.getUTCFullYear();
-
-      if (month < 10) {
-        month = "0" + month; // formats month to be consistant on table
-      }
-
-      if (day < 10) {
-        day = "0" + day; // formats day to be consistant on table
-      }
-      otherDate = year + "-" + month + "-" + day; //same format as entry.date
+      otherDate = formatDateString(otherDate);
 
       const newEntry = EntryFactory(otherDate, [null, null, null, null]);
       allData.push(newEntry);
@@ -196,6 +183,21 @@ const inputFormFunctions = (() => {
         loc++; // increments index because entries added below starting date
       }
     }
+  };
+
+  const formatDateString = (otherDate) => {
+    let month = otherDate.getUTCMonth() + 1; //months from 1-12 (returns 0-11 + 1)
+    let day = otherDate.getUTCDate();
+    const year = otherDate.getUTCFullYear();
+
+    if (month < 10) {
+      month = "0" + month; // formats month to be consistant on table
+    }
+
+    if (day < 10) {
+      day = "0" + day; // formats day to be consistant on table
+    }
+    return year + "-" + month + "-" + day; //same format as entry.date
   };
 
   return {
