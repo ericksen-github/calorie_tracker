@@ -20,11 +20,28 @@ const inputFormFunctions = (() => {
     isDateInArray(date);
     decimalCleanUp(tempArray);
 
+    if (allData.length == 0) {
+      changeInitialGraph(tempArray);
+    }
+
     const newEntry = EntryFactory(date, tempArray);
     allData.push(newEntry);
     compareDateLocations(date);
     tableFunctions.render();
     removeForm();
+  };
+
+  // swaps graph display based on initial input data
+  const changeInitialGraph = (tempArray) => {
+    if (tempArray[0] > 0) {
+      document.getElementById("weightButton").click();
+    } else if (tempArray[1] > 0) {
+      document.getElementById("caloriesButton").click();
+    } else if (tempArray[2] > 0) {
+      document.getElementById("exerciseButton").click();
+    } else if (tempArray[3] > 0) {
+      document.getElementById("proteinButton").click();
+    }
   };
 
   const removeForm = () => {
