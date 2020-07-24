@@ -141,7 +141,7 @@ const inputFormFunctions = (() => {
       const nextDate = new Date(allData[loc + 1].date);
       let diffDays = Math.round(Math.abs((nextDate - entryDate) / oneDay));
       if (diffDays > 1) {
-        addUpperDates(loc, diffDays, oneDay);
+        addBlankDates(loc, diffDays, oneDay, "upper");
       }
     }
 
@@ -151,63 +151,45 @@ const inputFormFunctions = (() => {
       const priorDate = new Date(allData[loc - 1].date);
       let diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
       if (diffDays > 1) {
-        addLowerDates(loc, diffDays, oneDay);
+        addBlankDates(loc, diffDays, oneDay, "lower");
       }
     }
   };
 
-  const addLowerDates = (loc, diffDays, oneDay) => {
+  const addBlankDates = (loc, diffDays, oneDay, direction) => {
     while (diffDays > 1) {
       const entryDate = new Date(allData[loc].date);
-      let priorDate = new Date(allData[loc - 1].date);
+      let otherDate;
 
-      priorDate.setDate(priorDate.getDate() + 1); // increments date of priorDate
+      if (direction == "upper") {
+        otherDate = new Date(allData[loc + 1].date);
+        otherDate.setDate(otherDate.getDate() - 1); // reduces date of otherDate
+      } else {
+        otherDate = new Date(allData[loc - 1].date);
+        otherDate.setDate(otherDate.getDate() + 1); // increments date of otherDate
+      }
 
-      let month = priorDate.getUTCMonth() + 1; //months from 1-12 (returns 0-11 + 1)
-      const day = priorDate.getUTCDate();
-      const year = priorDate.getUTCFullYear();
+      let month = otherDate.getUTCMonth() + 1; //months from 1-12 (returns 0-11 + 1)
+      const day = otherDate.getUTCDate();
+      const year = otherDate.getUTCFullYear();
 
       if (month < 10) {
         month = "0" + month; // formats month to be consistant on table
       }
+      otherDate = year + "-" + month + "-" + day; //same format as entry.date
 
-      priorDate = year + "-" + month + "-" + day; //same format as entry.date
-
-      const newEntry = EntryFactory(priorDate, [null, null, null, null]);
+      const newEntry = EntryFactory(otherDate, [null, null, null, null]);
       allData.push(newEntry);
       tableFunctions.sortTable();
 
-      priorDate = new Date(priorDate); //changes priorDate to match
+      otherDate = new Date(otherDate); //changes otherDate to match
 
-      diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
-      loc++;
-    }
-  };
-
-  const addUpperDates = (loc, diffDays, oneDay) => {
-    while (diffDays > 1) {
-      const entryDate = new Date(allData[loc].date);
-      let nextDate = new Date(allData[loc + 1].date);
-
-      nextDate.setDate(nextDate.getDate() - 1); // reduces date of nextDate
-
-      let month = nextDate.getUTCMonth() + 1; //months from 1-12 (returns 0-11 + 1)
-      const day = nextDate.getUTCDate();
-      const year = nextDate.getUTCFullYear();
-
-      if (month < 10) {
-        month = "0" + month; // formats month to be consistant on table
+      if (direction == "upper") {
+        diffDays = Math.round(Math.abs((otherDate - entryDate) / oneDay));
+      } else {
+        diffDays = Math.round(Math.abs((entryDate - otherDate) / oneDay));
+        loc++; // increments index because entries added below starting date
       }
-
-      nextDate = year + "-" + month + "-" + day; //same format as entry.date
-
-      const newEntry = EntryFactory(nextDate, [null, null, null, null]);
-      allData.push(newEntry);
-      tableFunctions.sortTable();
-
-      nextDate = new Date(nextDate); //changes nextDate to match
-
-      diffDays = Math.round(Math.abs((nextDate - entryDate) / oneDay));
     }
   };
 
