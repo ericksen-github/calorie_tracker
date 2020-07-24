@@ -122,6 +122,7 @@ const graphSelector = (() => {
     };
 
     const twoAxis = {
+      spanGaps: true,
       scales: {
         yAxes: [
           {
