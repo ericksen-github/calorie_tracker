@@ -139,6 +139,7 @@ const inputFormFunctions = (() => {
     if (allData[loc + 1]) {
       const entryDate = new Date(allData[loc].date);
       const nextDate = new Date(allData[loc + 1].date);
+
       let diffDays = Math.round(Math.abs((nextDate - entryDate) / oneDay));
       if (diffDays > 1) {
         addBlankDates(loc, diffDays, oneDay, "upper");
@@ -170,11 +171,15 @@ const inputFormFunctions = (() => {
       }
 
       let month = otherDate.getUTCMonth() + 1; //months from 1-12 (returns 0-11 + 1)
-      const day = otherDate.getUTCDate();
+      let day = otherDate.getUTCDate();
       const year = otherDate.getUTCFullYear();
 
       if (month < 10) {
         month = "0" + month; // formats month to be consistant on table
+      }
+
+      if (day < 10) {
+        day = "0" + day; // formats day to be consistant on table
       }
       otherDate = year + "-" + month + "-" + day; //same format as entry.date
 
