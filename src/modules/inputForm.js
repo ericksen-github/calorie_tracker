@@ -135,29 +135,23 @@ const inputFormFunctions = (() => {
       }
     }
 
-    if (allData[loc - 1]) {
-      const entryDate = new Date(allData[loc].date);
-      const priorDate = new Date(allData[loc - 1].date);
-      let diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
-      if (diffDays > 1) {
-        addLowerDates(loc, diffDays, oneDay);
-      }
-    }
-
-    // finds location of entry in allData again incase date index changed
-    for (let i = 0; i < allData.length; i++) {
-      if (allData[i].date == date) {
-        loc = i;
-        break;
-      }
-    }
-
+    // checks for dates above entry and adds blanks if needed
     if (allData[loc + 1]) {
       const entryDate = new Date(allData[loc].date);
       const nextDate = new Date(allData[loc + 1].date);
       let diffDays = Math.round(Math.abs((nextDate - entryDate) / oneDay));
       if (diffDays > 1) {
         addUpperDates(loc, diffDays, oneDay);
+      }
+    }
+
+    // checks for dates below entry and adds blanks if needed
+    if (allData[loc - 1]) {
+      const entryDate = new Date(allData[loc].date);
+      const priorDate = new Date(allData[loc - 1].date);
+      let diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
+      if (diffDays > 1) {
+        addLowerDates(loc, diffDays, oneDay);
       }
     }
   };
@@ -195,7 +189,7 @@ const inputFormFunctions = (() => {
       const entryDate = new Date(allData[loc].date);
       let nextDate = new Date(allData[loc + 1].date);
 
-      nextDate.setDate(nextDate.getDate() - 1); // increments date of nextDate
+      nextDate.setDate(nextDate.getDate() - 1); // reduces date of nextDate
 
       let month = nextDate.getUTCMonth() + 1; //months from 1-12 (returns 0-11 + 1)
       const day = nextDate.getUTCDate();
