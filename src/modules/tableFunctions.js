@@ -108,14 +108,49 @@ const tableFunctions = (() => {
     const entryDate = selectedRow.children[0].innerHTML;
     const table = selectedRow.parentElement.parentElement;
     table.deleteRow(selectedRow.rowIndex); // removes row from table
+    removeEmptyEntries(entryDate); // removes entry from allData
+    graphSelector.selectGraph(); // updates graph
+    //  localStorageFunctions.saveNewData();
+  };
 
-    for (let j = 0; j < allData.length; j++) {
-      if (allData[j].date == entryDate) {
-        allData.splice(j, 1); // and splices out entry
+  const removeEmptyEntries = (entryDate) => {
+    if (entryDate == allData[0].date) {
+      allData.shift(); // removes first index of array
+
+      // checks if new first index is empty and removes until user entry is found
+      while (
+        allData[0] && // in case user deletes all entries
+        allData[0].weight == null &&
+        allData[0].calorie == null &&
+        allData[0].exercise == null &&
+        allData[0].protein == null
+      ) {
+        allData.shift();
+      }
+    } else if (entryDate == allData[allData.length - 1].date) {
+      allData.pop(); // removes last index of array
+
+      // checks if new last index is empty and removes until a user entry is found
+      while (
+        allData[allData.length - 1].weight == null &&
+        allData[allData.length - 1].calorie == null &&
+        allData[allData.length - 1].exercise == null &&
+        allData[allData.length - 1].protein == null
+      ) {
+        allData.pop();
+      }
+    } else {
+      // if entry is not first/last, finds entry in allData
+      // and clears data leaving date as a blank for the graph
+      for (let j = 0; j < allData.length; j++) {
+        if (allData[j].date == entryDate) {
+          allData[j].weight = null;
+          allData[j].calorie = null;
+          allData[j].exercise = null;
+          allData[j].protein = null;
+        }
       }
     }
-    graphSelector.selectGraph();
-    //  localStorageFunctions.saveNewData();
   };
 
   return {
