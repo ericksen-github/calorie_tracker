@@ -125,6 +125,7 @@ const inputFormFunctions = (() => {
   const compareDateLocations = (date) => {
     let loc; // index of date in allData
     const oneDay = 24 * 60 * 60 * 1000;
+    tableFunctions.sortTable();
 
     // finds location of entry in allData
     for (let i = 0; i < allData.length; i++) {
@@ -139,7 +140,7 @@ const inputFormFunctions = (() => {
       const priorDate = new Date(allData[loc - 1].date);
       let diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
       if (diffDays > 1) {
-        addUpperDates(loc, diffDays, oneDay);
+        addLowerDates(loc, diffDays, oneDay);
       }
     }
 
@@ -156,12 +157,12 @@ const inputFormFunctions = (() => {
       const nextDate = new Date(allData[loc + 1].date);
       let diffDays = Math.round(Math.abs((nextDate - entryDate) / oneDay));
       if (diffDays > 1) {
-        addLowerDates(loc, diffDays, oneDay);
+        addUpperDates(loc, diffDays, oneDay);
       }
     }
   };
 
-  const addUpperDates = (loc, diffDays, oneDay) => {
+  const addLowerDates = (loc, diffDays, oneDay) => {
     while (diffDays > 1) {
       const entryDate = new Date(allData[loc].date);
       let priorDate = new Date(allData[loc - 1].date);
@@ -189,7 +190,7 @@ const inputFormFunctions = (() => {
     }
   };
 
-  const addLowerDates = (loc, diffDays, oneDay) => {
+  const addUpperDates = (loc, diffDays, oneDay) => {
     while (diffDays > 1) {
       const entryDate = new Date(allData[loc].date);
       let nextDate = new Date(allData[loc + 1].date);
