@@ -67,7 +67,7 @@ const tableFunctions = (() => {
     }
   };
 
-  // places empty string if value null, otherwise gives entry value
+  // places empty string if value null, otherwise places entry value for table
   const nullSwapper = (entry, w, c, e, p) => {
     if (entry.weight == null) {
       w = "";
@@ -102,20 +102,20 @@ const tableFunctions = (() => {
         removeEntry(button.parentElement.parentElement); // passes same row as remove button
       });
     });
+  };
 
-    const removeEntry = (selectedRow) => {
-      const entryDate = selectedRow.children[0].innerHTML;
-      const table = selectedRow.parentElement.parentElement;
-      table.deleteRow(selectedRow.rowIndex); // removes row from table
+  const removeEntry = (selectedRow) => {
+    const entryDate = selectedRow.children[0].innerHTML;
+    const table = selectedRow.parentElement.parentElement;
+    table.deleteRow(selectedRow.rowIndex); // removes row from table
 
-      for (let j = 0; j < allData.length; j++) {
-        if (allData[j].date == entryDate) {
-          allData.splice(j, 1); // and splices out entry
-        }
+    for (let j = 0; j < allData.length; j++) {
+      if (allData[j].date == entryDate) {
+        allData.splice(j, 1); // and splices out entry
       }
-      graphSelector.selectGraph();
-      //  localStorageFunctions.saveNewData();
-    };
+    }
+    graphSelector.selectGraph();
+    //  localStorageFunctions.saveNewData();
   };
 
   return {
