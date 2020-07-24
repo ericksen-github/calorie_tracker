@@ -139,12 +139,29 @@ const inputFormFunctions = (() => {
       const priorDate = new Date(allData[loc - 1].date);
       let diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
       if (diffDays > 1) {
+        addUpperDates(loc, diffDays, oneDay);
+      }
+    }
+
+    // finds location of entry in allData again incase date index changed
+    for (let i = 0; i < allData.length; i++) {
+      if (allData[i].date == date) {
+        loc = i;
+        break;
+      }
+    }
+
+    if (allData[loc + 1]) {
+      const entryDate = new Date(allData[loc].date);
+      const nextDate = new Date(allData[loc + 1].date);
+      let diffDays = Math.round(Math.abs((nextDate - entryDate) / oneDay));
+      if (diffDays > 1) {
         addLowerDates(loc, diffDays, oneDay);
       }
     }
   };
 
-  const addLowerDates = (loc, diffDays, oneDay) => {
+  const addUpperDates = (loc, diffDays, oneDay) => {
     while (diffDays > 1) {
       const entryDate = new Date(allData[loc].date);
       let priorDate = new Date(allData[loc - 1].date);
@@ -169,6 +186,33 @@ const inputFormFunctions = (() => {
 
       diffDays = Math.round(Math.abs((entryDate - priorDate) / oneDay));
       loc++;
+    }
+  };
+
+  const addLowerDates = (loc, diffDays, oneDay) => {
+    while (diffDays > 1) {
+      const entryDate = new Date(allData[loc].date);
+      let nextDate = new Date(allData[loc + 1].date);
+
+      nextDate.setDate(nextDate.getDate() - 1); // increments date of nextDate
+
+      let month = nextDate.getUTCMonth() + 1; //months from 1-12 (returns 0-11 + 1)
+      const day = nextDate.getUTCDate();
+      const year = nextDate.getUTCFullYear();
+
+      if (month < 10) {
+        month = "0" + month; // formats month to be consistant on table
+      }
+
+      nextDate = year + "-" + month + "-" + day; //same format as entry.date
+
+      const newEntry = EntryFactory(nextDate, [null, null, null, null]);
+      allData.push(newEntry);
+      tableFunctions.sortTable();
+
+      nextDate = new Date(nextDate); //changes nextDate to match
+
+      diffDays = Math.round(Math.abs((nextDate - entryDate) / oneDay));
     }
   };
 
