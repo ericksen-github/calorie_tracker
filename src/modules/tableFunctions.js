@@ -1,6 +1,7 @@
 // entry object - date, weight, calorie, exercise, protein
 import { allData } from "./dataset";
 import { graphSelector } from "./graphSelector";
+import { createInputForm } from "./createInputForm";
 
 const tableFunctions = (() => {
   let sortTracker = "newest"; // used to track what direction to sort dates by
@@ -51,7 +52,7 @@ const tableFunctions = (() => {
                     `;
     }
     document.querySelector("tbody").innerHTML = entryHTML;
-    createRemoveListeners();
+    createListeners();
     graphSelector.selectGraph();
   };
 
@@ -96,12 +97,35 @@ const tableFunctions = (() => {
     return [w, c, e, p];
   };
 
-  const createRemoveListeners = () => {
+  const createListeners = () => {
+    document.querySelectorAll(".editButton").forEach((button) => {
+      button.addEventListener("click", () => {
+        editEntry(button.parentElement.parentElement); // passes same row as edit button
+      });
+    });
+
     document.querySelectorAll(".removeButton").forEach((button) => {
       button.addEventListener("click", () => {
         removeEntry(button.parentElement.parentElement); // passes same row as remove button
       });
     });
+  };
+
+  // creates input form, finds selected date in allData, and fills data into textboxes
+  const editEntry = (selectedRow) => {
+    createInputForm();
+    const entryDate = selectedRow.children[0].innerHTML;
+
+    for (let i = 0; i < allData.length; i++) {
+      if (allData[i].date == entryDate) {
+        document.getElementById("formDate").value = allData[i].date;
+        document.getElementById("weightTextBox").value = allData[i].weight;
+        document.getElementById("calorieTextBox").value = allData[i].calorie;
+        document.getElementById("exerciseTextBox").value = allData[i].exercise;
+        document.getElementById("proteinTextBox").value = allData[i].protein;
+        break;
+      }
+    }
   };
 
   const removeEntry = (selectedRow) => {
