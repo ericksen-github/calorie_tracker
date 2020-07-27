@@ -1,11 +1,13 @@
 table {
   border-collapse: collapse;
+  margin: auto;
 }
 
 td,
 th {
   padding: 8px 20px 8px 5px;
   vertical-align: middle;
+  text-align: center;
   font-size: 18px;
 }
 
