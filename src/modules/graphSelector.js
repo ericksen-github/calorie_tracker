@@ -1,4 +1,4 @@
-import { allData } from "./dataset";
+import { allData } from "./localStorage";
 import { lineChart } from "./Chart";
 
 const titleLabelArray = ["Weight", "Calories", "Exercise Calories", "Protein"];

@@ -1,10 +1,11 @@
-import { lineChart } from "./modules/Chart.js";
 import { createInputForm } from "./modules/createInputForm";
 import { tableFunctions } from "./modules/tableFunctions";
 import { graphSelector } from "./modules/graphSelector";
+import { localStorageFunctions } from "./modules/localStorage";
 
-// initializes linechart on page
-lineChart;
+if (localStorageFunctions.storageAvailable("localStorage")) {
+  localStorageFunctions.populateStorage();
+}
 
 document.getElementById("createFormButton").addEventListener("click", () => {
   createInputForm();

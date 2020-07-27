@@ -1,6 +1,6 @@
 //import { projectsArray, localStorageFunctions } from "./localStorage";
 import { EntryFactory } from "./entryObject.js";
-import { allData } from "./dataset.js";
+import { allData, localStorageFunctions } from "./localStorage";
 import { tableFunctions } from "./tableFunctions.js";
 
 const inputFormFunctions = (() => {
@@ -28,6 +28,7 @@ const inputFormFunctions = (() => {
     allData.push(newEntry);
     compareDateLocations(date);
     tableFunctions.render();
+    localStorageFunctions.saveNewData();
     removeForm();
   };
 

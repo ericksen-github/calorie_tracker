@@ -1,5 +1,5 @@
 // entry object - date, weight, calorie, exercise, protein
-import { allData } from "./dataset";
+import { allData, localStorageFunctions } from "./localStorage";
 import { graphSelector } from "./graphSelector";
 import { createInputForm } from "./createInputForm";
 
@@ -134,7 +134,7 @@ const tableFunctions = (() => {
     table.deleteRow(selectedRow.rowIndex); // removes row from table
     removeEmptyEntries(entryDate); // removes entry from allData
     graphSelector.selectGraph(); // updates graph
-    //  localStorageFunctions.saveNewData();
+    localStorageFunctions.saveNewData();
   };
 
   const removeEmptyEntries = (entryDate) => {
