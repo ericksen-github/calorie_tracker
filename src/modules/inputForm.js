@@ -57,13 +57,15 @@ const inputFormFunctions = (() => {
       "proteinTextBox",
     ];
     let checker;
+    let counter = 0;
 
     for (let i = 0; i < numArray.length; i++) {
       // varifies proper data in textboxes
       if (numArray[i] == "") {
-        // ignores blank data
-        continue;
+        counter++; // counts blanks to make sure all entries aren't empty
+        continue; // otherwise ignores blanks
       }
+
       if (isNaN(numArray[i]) || numArray[i] < 0) {
         // verifies for a non negative number in box
         document.getElementById(textBoxIDArray[i]).style.borderColor = "red";
@@ -71,6 +73,12 @@ const inputFormFunctions = (() => {
       } else {
         document.getElementById(textBoxIDArray[i]).style.borderColor = "black";
       }
+    }
+
+    if (counter == 4) {
+      // if all textboxes are blank, alerts user
+      alert("All data entries can not be blank.");
+      return false;
     }
 
     if (!checkDate(date)) {
