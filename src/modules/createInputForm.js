@@ -3,8 +3,12 @@ import { inputFormFunctions } from "./inputForm";
 const createInputForm = () => {
   document.getElementById("overlay").style.display = "block";
 
+  const containerWrapper = document.createElement("div");
+  containerWrapper.id = "formWrapper";
+
   const container = document.createElement("div");
   container.id = "formContainer";
+  containerWrapper.appendChild(container);
 
   const formTitle = document.createElement("div");
   formTitle.id = "formTitle";
@@ -43,7 +47,7 @@ const createInputForm = () => {
   });
   buttonContainer.appendChild(cancelButton);
 
-  document.getElementById("main").appendChild(container);
+  document.getElementById("main").appendChild(containerWrapper);
 };
 
 const removeForm = () => {
