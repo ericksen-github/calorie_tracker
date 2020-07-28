@@ -1,8 +1,18 @@
+#formWrapper {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 3;
+  overflow: auto;
+}
+
 #formContainer {
   position: absolute;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
-  top: 125px;
+  top: 10%;
   left: 50%;
   margin-left: -120px;
   padding: 10px;
