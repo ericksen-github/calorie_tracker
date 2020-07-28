@@ -25,5 +25,5 @@ for (let i = 0; i < btns.length; i++) {
 
 // Adds listener to Date header for sorting options on click
 document.getElementById("dateHeader").addEventListener("click", () => {
-  tableFunctions.checkTracker();
+  tableFunctions.swapTrackerDirection();
 });

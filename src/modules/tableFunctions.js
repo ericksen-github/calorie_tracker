@@ -5,8 +5,8 @@ import { createInputForm } from "./createInputForm";
 
 const tableFunctions = (() => {
   let sortTracker = "newest"; // used to track what direction to sort dates by
-  const sortTable = () => {
-    if (sortTracker == "newest") {
+  const sortTable = (direction) => {
+    if (sortTracker == "newest" || direction == "newest") {
       allData.sort(function compare(a, b) {
         var dateA = new Date(a.date);
         var dateB = new Date(b.date);
@@ -21,7 +21,7 @@ const tableFunctions = (() => {
     }
   };
 
-  const checkTracker = () => {
+  const swapTrackerDirection = () => {
     if (sortTracker == "newest") {
       sortTracker = "oldest";
     } else {
@@ -54,6 +54,7 @@ const tableFunctions = (() => {
     }
     document.querySelector("tbody").innerHTML = entryHTML;
     createListeners();
+    sortTable("newest");
     graphSelector.selectGraph();
   };
 
@@ -180,7 +181,7 @@ const tableFunctions = (() => {
 
   return {
     sortTable,
-    checkTracker,
+    swapTrackerDirection,
     render,
   };
 })();
