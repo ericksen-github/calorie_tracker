@@ -28,6 +28,7 @@ const tableFunctions = (() => {
       sortTracker = "newest";
     }
     sortTable();
+    render();
   };
 
   const render = () => {
