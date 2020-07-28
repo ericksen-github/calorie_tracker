@@ -3,12 +3,12 @@ import { inputFormFunctions } from "./inputForm";
 const createInputForm = () => {
   document.getElementById("overlay").style.display = "block";
 
-  const containerWrapper = document.createElement("div");
-  containerWrapper.id = "formWrapper";
+  const formWrapper = document.createElement("div");
+  formWrapper.id = "formWrapper";
 
   const container = document.createElement("div");
   container.id = "formContainer";
-  containerWrapper.appendChild(container);
+  formWrapper.appendChild(container);
 
   const formTitle = document.createElement("div");
   formTitle.id = "formTitle";
@@ -43,16 +43,11 @@ const createInputForm = () => {
   cancelButton.id = "cancelButton";
   cancelButton.innerHTML = "Cancel";
   cancelButton.addEventListener("click", () => {
-    removeForm();
+    inputFormFunctions.removeForm();
   });
   buttonContainer.appendChild(cancelButton);
 
-  document.getElementById("main").appendChild(containerWrapper);
-};
-
-const removeForm = () => {
-  document.getElementById("formContainer").remove();
-  document.getElementById("overlay").style.display = "none";
+  document.getElementById("main").appendChild(formWrapper);
 };
 
 const createTextBoxes = (container) => {

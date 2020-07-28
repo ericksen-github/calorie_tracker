@@ -46,7 +46,7 @@ const inputFormFunctions = (() => {
   };
 
   const removeForm = () => {
-    document.getElementById("formContainer").remove();
+    document.getElementById("formWrapper").remove();
     document.getElementById("overlay").style.display = "none";
   };
 
@@ -229,6 +229,7 @@ const inputFormFunctions = (() => {
   return {
     submitButtonPress,
     isNumberKey,
+    removeForm,
   };
 })();
 
