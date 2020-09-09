@@ -1,7 +1,8 @@
 import { createInputForm } from "./modules/createInputForm";
 import { tableFunctions } from "./modules/tableFunctions";
 import { graphSelector } from "./modules/graphSelector";
-import { localStorageFunctions } from "./modules/localStorage";
+import { localStorageFunctions, allData } from "./modules/localStorage";
+import { clearData } from "./modules/clearData";
 
 if (localStorageFunctions.storageAvailable("localStorage")) {
   localStorageFunctions.populateStorage();
@@ -22,6 +23,11 @@ for (let i = 0; i < btns.length; i++) {
     graphSelector.selectGraph();
   });
 }
+
+const clearButton = document.getElementById("clearButton");
+clearButton.addEventListener("click", () => {
+  clearData();
+});
 
 // Adds listener to Date header for sorting options on click
 document.getElementById("dateHeader").addEventListener("click", () => {
