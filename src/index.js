@@ -2,6 +2,7 @@ import { createInputForm } from "./modules/createInputForm";
 import { tableFunctions } from "./modules/tableFunctions";
 import { graphSelector } from "./modules/graphSelector";
 import { localStorageFunctions, allData } from "./modules/localStorage";
+import { showDemoArray } from "./modules/demoData";
 import { clearData } from "./modules/clearData";
 
 if (localStorageFunctions.storageAvailable("localStorage")) {
@@ -23,6 +24,11 @@ for (let i = 0; i < btns.length; i++) {
     graphSelector.selectGraph();
   });
 }
+
+const demoButton = document.getElementById("demoButton");
+demoButton.addEventListener("click", () => {
+  showDemoArray();
+});
 
 const clearButton = document.getElementById("clearButton");
 clearButton.addEventListener("click", () => {
