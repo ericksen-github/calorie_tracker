@@ -83,6 +83,20 @@ h2 {
   color: black;
 }
 
+footer {
+  text-align: center;
+  height: 2rem;
+  width: 100%;
+  margin-top: 5rem;
+  line-height: 2rem;
+  box-shadow: inset 0px 0px 15px 3px #23395e;
+  background: linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+  background-color: #2e466e;
+  border: 1px solid #1f2f47;
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
 #overlay {
   z-index: 2;
   position: fixed;
