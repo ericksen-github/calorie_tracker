@@ -14,6 +14,12 @@ h2 {
   display: block;
   width: 100%;
   margin-bottom: 0.25rem;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  font-size: 1rem;
+  background-color: rgb(15, 100, 200);
 }
 
 .lineChartContainer {
@@ -71,7 +77,8 @@ h2 {
   margin-bottom: 10px;
 }
 
-#createFormButton:hover {
+#createFormButton:hover,
+.headerButtons:hover {
   background-color: rgb(136, 184, 240);
   color: black;
 }
