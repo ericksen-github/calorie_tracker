@@ -3,6 +3,7 @@ import { EntryFactory } from "./entryObject";
 import { tableFunctions } from "./tableFunctions";
 import { clearData } from "./clearData";
 
+// dummy data used for demoing project
 const demoArray = [
   ["2020-07-01", [182.2, 3254, 213, 198]],
   ["2020-07-02", [183.2, 3412, 412, 156]],
@@ -31,7 +32,7 @@ const showDemoArray = () => {
 
     const newEntry = EntryFactory(date, tempArray);
     allData.push(newEntry);
-    tableFunctions.render();
+    tableFunctions.render(); // updates table/graph
   }
 };
 

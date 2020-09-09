@@ -5,8 +5,14 @@ import { showDemoArray } from "./demoData";
 import { clearData } from "./clearData";
 
 const createInitialListeners = () => {
-  document.getElementById("createFormButton").addEventListener("click", () => {
-    createInputForm();
+  const demoButton = document.getElementById("demoButton");
+  demoButton.addEventListener("click", () => {
+    showDemoArray();
+  });
+
+  const clearButton = document.getElementById("clearButton");
+  clearButton.addEventListener("click", () => {
+    clearData();
   });
 
   // Adds listeners to swap button with active class to the selected button (highlight it)
@@ -21,14 +27,8 @@ const createInitialListeners = () => {
     });
   }
 
-  const demoButton = document.getElementById("demoButton");
-  demoButton.addEventListener("click", () => {
-    showDemoArray();
-  });
-
-  const clearButton = document.getElementById("clearButton");
-  clearButton.addEventListener("click", () => {
-    clearData();
+  document.getElementById("createFormButton").addEventListener("click", () => {
+    createInputForm();
   });
 
   // Adds listener to Date header for sorting options on click
