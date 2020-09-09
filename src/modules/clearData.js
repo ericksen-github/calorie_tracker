@@ -12,7 +12,7 @@ const clearData = () => {
   }
 
   graphSelector.selectGraph(); // updates graph
-  //localStorageFunctions.saveNewData();
+  localStorageFunctions.saveNewData();
 };
 
 export { clearData };
