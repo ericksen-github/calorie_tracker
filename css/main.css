@@ -3,6 +3,19 @@ h2 {
   text-align: center;
 }
 
+#headerButtonContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.headerButtons {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
 .lineChartContainer {
   width: 85%;
   margin: auto;

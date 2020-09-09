@@ -10,6 +10,10 @@
   </head>
   <header>
     <h2>Weight and Calories Tracker</h2>
+    <div id="headerButtonContainer">
+      <button id="demoButton" class="headerButtons">Populate Demo Data</button>
+      <button id="clearButton" class="headerButtons">Clear Current Data</button>
+    </div>
   </header>
   <body>
     <div id="overlay"></div>
@@ -33,7 +37,7 @@
       </div>
 
       <div class="tableContainer">
-        <table>
+        <table id="table">
           <thead>
             <tr>
               <th id="dateHeader">Date</th>
